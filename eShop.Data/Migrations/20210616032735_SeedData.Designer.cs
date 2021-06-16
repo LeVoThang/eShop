@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShop.Data.EF;
 
 namespace eShop.Data.Migrations
 {
     [DbContext(typeof(EShopDbContext))]
-    partial class EShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210616032735_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,7 +92,7 @@ namespace eShop.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("IsShowOnHome")
+                    b.Property<bool>("IsShowOnHom")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ParentId")
@@ -112,14 +114,14 @@ namespace eShop.Data.Migrations
                         new
                         {
                             Id = 1,
-                            IsShowOnHome = true,
+                            IsShowOnHom = true,
                             SortOrder = 1,
                             Status = 1
                         },
                         new
                         {
                             Id = 2,
-                            IsShowOnHome = true,
+                            IsShowOnHom = true,
                             SortOrder = 2,
                             Status = 1
                         });
@@ -294,7 +296,7 @@ namespace eShop.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 6, 16, 10, 33, 43, 458, DateTimeKind.Local).AddTicks(3905));
+                        .HasDefaultValue(new DateTime(2021, 6, 16, 10, 27, 34, 203, DateTimeKind.Local).AddTicks(8940));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -385,7 +387,7 @@ namespace eShop.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 6, 16, 10, 33, 43, 477, DateTimeKind.Local).AddTicks(2663),
+                            DateCreated = new DateTime(2021, 6, 16, 10, 27, 34, 240, DateTimeKind.Local).AddTicks(6462),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
