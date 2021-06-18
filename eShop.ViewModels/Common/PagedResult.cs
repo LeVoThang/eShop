@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShop.Application.Catalog.Dtos
+namespace eShop.ViewModels.Common
 {
     public class PagedResult<T>
     {
@@ -10,4 +10,3 @@ namespace eShop.Application.Catalog.Dtos
         public int TotalRecord { set; get; }
     }
 }
- 

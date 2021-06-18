@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShop.Data.EF;
 
 namespace eShop.Data.Migrations
 {
     [DbContext(typeof(EShopDbContext))]
-    partial class EShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210617083049_ChangeFileLengthType")]
+    partial class ChangeFileLengthType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,7 +182,7 @@ namespace eShop.Data.Migrations
                         new
                         {
                             Id = new Guid("8699ef4a-3fe5-4a6a-9525-b007f2002265"),
-                            ConcurrencyStamp = "1fb66c9d-900b-4a0d-83a3-b76940143ff5",
+                            ConcurrencyStamp = "50e2d087-a17a-4a8c-b402-b4602186b8a1",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -257,7 +259,7 @@ namespace eShop.Data.Migrations
                         {
                             Id = new Guid("925948cc-a1e0-4162-aeeb-86dc1262d9ad"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d03e99b5-052c-48f1-89e6-b8c3e654c7fe",
+                            ConcurrencyStamp = "e9c91ae8-7a46-4dbe-8c06-401725586f3c",
                             Dob = new DateTime(1999, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "levothang.99@gmail.com",
                             EmailConfirmed = true,
@@ -266,7 +268,7 @@ namespace eShop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "levothang.99@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJNe39YEiftMH6KMI2Akf7Y+qsEg7AF2ze4tZs/b9QJuyNRiE2FcNAEiDXHy1FGaPw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF6n57ZsF4mbJmjhDQSRUJkaf5MJaA3gfGd2/+k8uWyVN3ShGSRFXaZavJsRyifbgg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -611,7 +613,7 @@ namespace eShop.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 6, 17, 15, 45, 21, 915, DateTimeKind.Local).AddTicks(9354),
+                            DateCreated = new DateTime(2021, 6, 17, 15, 30, 48, 431, DateTimeKind.Local).AddTicks(6726),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
