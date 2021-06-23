@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{5D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{40BC0285-C8A6-4C9A-A47C-3BD8A7720092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.AdminApp", "eShop.AdminApp\eShop.AdminApp.csproj", "{B33F25D3-79A0-4194-8F33-1BF905C69282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.AdminApp", "eShop.AdminApp\eShop.AdminApp.csproj", "{B33F25D3-79A0-4194-8F33-1BF905C69282}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

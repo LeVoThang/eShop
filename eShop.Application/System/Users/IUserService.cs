@@ -1,4 +1,6 @@
-﻿using eShop.ViewModels.System.Users;
+﻿using eShop.ViewModels.Common;
+using eShop.ViewModels.System.Users;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +12,8 @@ namespace eShop.Application.System.Users
     {
         Task<string>Authenticate(LoginRequest request);
         Task<bool> Register(RegisterRequest request);
+
+        Task<PagedResult<UserVm>> GetUsersPaging(GetUserPagingRequest request);
     }
+
 }
