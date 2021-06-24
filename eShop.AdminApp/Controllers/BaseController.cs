@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace eShop.AdminApp.Controllers
 {
     public class BaseController : Controller
     {
+        [Authorize]
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var sessions = context.HttpContext.Session.GetString("Token");
