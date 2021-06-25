@@ -34,6 +34,10 @@ namespace eShop.AdminApp.Controllers
             };
             var data = await _userApiClient.GetUsersPagings(request);
             ViewBag.Keyword = keyword;
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
             return View(data.ResultObj);
         }
 
@@ -56,9 +60,13 @@ namespace eShop.AdminApp.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
+
             var result = await _userApiClient.RegisterUser(request);
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Add user successfully !";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
             return View(request);
@@ -92,11 +100,13 @@ namespace eShop.AdminApp.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-
+             
             var result = await _userApiClient.UpdateUser(request.Id, request);
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Edit user successfully !";
                 return RedirectToAction("Index");
-
+            }
             ModelState.AddModelError("", result.Message);
             return View(request);
         }
@@ -128,7 +138,10 @@ namespace eShop.AdminApp.Controllers
                 return View();
             var result = await _userApiClient.Delete(request.Id);
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Delete user successfully !";
                 return RedirectToAction("Index");
+            }
 
             ModelState.AddModelError("", result.Message);
             return View(request);
