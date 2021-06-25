@@ -84,7 +84,9 @@ namespace eShop.Application.System.Users
                 Dob = user.Dob,
                 FirstName = user.FirstName,
                 Id = user.Id,
-                LastName = user.LastName
+                LastName = user.LastName,
+                UserName = user.UserName
+
             };
             return new ApiSuccessResult<UserVm>(userVm);
         }
@@ -111,8 +113,10 @@ namespace eShop.Application.System.Users
             // Select and projection
             var pagedResult = new PagedResult<UserVm>()
             {
-                TotalRecord = totalRow,
-                Items = await data
+                TotalRecords = totalRow,
+                Items = await data,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize
             };
             return new ApiSuccessResult<PagedResult<UserVm>>(pagedResult);
         }
@@ -122,12 +126,13 @@ namespace eShop.Application.System.Users
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user != null)
             {
-                return new ApiErrorResult<bool>("The account has been existed !.");
+                return new ApiErrorResult<bool>("User name has been existed!");
             }
             if (await _userManager.FindByEmailAsync(request.Email) != null)
             {
-                return new ApiErrorResult<bool>("The account has been existed !.");
+                return new ApiErrorResult<bool>("Email has been existed!");
             }
+
             user = new AppUser()
             {
                 Dob = request.Dob,
@@ -137,13 +142,12 @@ namespace eShop.Application.System.Users
                 UserName = request.UserName,
                 PhoneNumber = request.PhoneNumber
             };
-
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
                 return new ApiSuccessResult<bool>();
             }
-            return new ApiErrorResult<bool>("Register fail");
+            return new ApiErrorResult<bool>("Register fail!");
         }
 
         public async Task<ApiResult<bool>> Update(Guid id,UserUpdateRequest request)
