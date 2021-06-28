@@ -1,4 +1,12 @@
-﻿using eShop.AdminApp.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using eShop.AdminApp.Services;
+using eShop.ViewModels.Common;
 using eShop.ViewModels.System.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -7,11 +15,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eShop.AdminApp.Controllers
 {
@@ -19,10 +22,15 @@ namespace eShop.AdminApp.Controllers
     {
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
-        public UserController(IUserApiClient userApiClient, IConfiguration configuration)
+        private readonly IRoleApiClient _roleApiClient;
+
+        public UserController(IUserApiClient userApiClient,
+            IConfiguration configuration,
+            IRoleApiClient roleApiClient)
         {
             _userApiClient = userApiClient;
             _configuration = configuration;
+            _roleApiClient = roleApiClient;
         }
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
         {
@@ -100,7 +108,7 @@ namespace eShop.AdminApp.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-             
+
             var result = await _userApiClient.UpdateUser(request.Id, request);
             if (result.IsSuccessed)
             {
@@ -147,6 +155,46 @@ namespace eShop.AdminApp.Controllers
             return View(request);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> RoleAssign(Guid id)
+        {
+            var roleAssignRequest = await GetRoleAssignRequest(id);
+            return View(roleAssignRequest);
+        }
 
+
+        [HttpPost]
+        public async Task<IActionResult> RoleAssign(RoleAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _userApiClient.RoleAssign(request.Id, request);
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Role assign successfully !";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", result.Message);
+            var roleAssignRequest = GetRoleAssignRequest(request.Id);
+            return View(roleAssignRequest);
+        }
+
+        private async Task<RoleAssignRequest> GetRoleAssignRequest(Guid id)
+        {
+            var userObj = await _userApiClient.GetById(id);
+            var roleObj = await _roleApiClient.GetAll();
+            var roleAssignRequest = new RoleAssignRequest();
+            foreach (var role in roleObj.ResultObj)
+            {
+                roleAssignRequest.Roles.Add(new SelectItem()
+                {
+                    Id = role.Id.ToString(),
+                    Name = role.Name,
+                    Selected = userObj.ResultObj.Roles.Contains(role.Name)
+                });
+            }
+            return roleAssignRequest;
+        }
     }
 }
