@@ -168,10 +168,10 @@ namespace eShop.Application.System.Users
 
         public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
         {
-            var user = await _userManager.FindByNameAsync(id.ToString());
+            var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
             {
-                return new ApiErrorResult<bool>("User name is not exist!");
+                return new ApiErrorResult<bool>("User is not exist!");
             }
 
             var removedRoles = request.Roles.Where(x => x.Selected == false).Select(x => x.Name).ToList();

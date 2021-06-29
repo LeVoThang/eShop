@@ -176,7 +176,7 @@ namespace eShop.AdminApp.Controllers
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", result.Message);
-            var roleAssignRequest = GetRoleAssignRequest(request.Id);
+            var roleAssignRequest = await GetRoleAssignRequest(request.Id);
             return View(roleAssignRequest);
         }
 

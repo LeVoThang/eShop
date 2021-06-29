@@ -18,7 +18,7 @@ namespace eShop.BackendApi.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index3()
         {
             return Ok();
         }
