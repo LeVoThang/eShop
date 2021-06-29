@@ -7,6 +7,7 @@ using eShop.BackendApi.Constants;
 using eShop.Data.EF;
 using eShop.Data.Entities;
 using eShop.ViewModels.System.Users;
+using eShopSolution.Application.Catalog.Products;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
