@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using eShop.AdminApp.Controllers;
 using eShop.AdminApp.Services;
 using eShop.ViewModels.Common;
 using eShop.ViewModels.System.Users;
@@ -16,7 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace eShop.AdminApp.Controllers
+namespace eShopSolution.AdminApp.Controllers
 {
     public class UserController : BaseController
     {
@@ -25,20 +26,21 @@ namespace eShop.AdminApp.Controllers
         private readonly IRoleApiClient _roleApiClient;
 
         public UserController(IUserApiClient userApiClient,
-            IConfiguration configuration,
-            IRoleApiClient roleApiClient)
+            IRoleApiClient roleApiClient,
+            IConfiguration configuration)
         {
             _userApiClient = userApiClient;
             _configuration = configuration;
             _roleApiClient = roleApiClient;
         }
+
         public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
         {
             var request = new GetUserPagingRequest()
             {
                 Keyword = keyword,
                 PageIndex = pageIndex,
-                PageSize = pageIndex
+                PageSize = pageSize
             };
             var data = await _userApiClient.GetUsersPagings(request);
             ViewBag.Keyword = keyword;
@@ -50,7 +52,7 @@ namespace eShop.AdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DetailsAsync(Guid id)
+        public async Task<IActionResult> Details(Guid id)
         {
             var result = await _userApiClient.GetById(id);
             return View(result.ResultObj);
@@ -62,7 +64,6 @@ namespace eShop.AdminApp.Controllers
             return View();
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Create(RegisterRequest request)
         {
@@ -72,14 +73,13 @@ namespace eShop.AdminApp.Controllers
             var result = await _userApiClient.RegisterUser(request);
             if (result.IsSuccessed)
             {
-                TempData["result"] = "Add user successfully !";
+                TempData["result"] = "Thêm mới người dùng thành công";
                 return RedirectToAction("Index");
             }
 
             ModelState.AddModelError("", result.Message);
             return View(request);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -102,7 +102,6 @@ namespace eShop.AdminApp.Controllers
             return RedirectToAction("Error", "Home");
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Edit(UserUpdateRequest request)
         {
@@ -112,13 +111,13 @@ namespace eShop.AdminApp.Controllers
             var result = await _userApiClient.UpdateUser(request.Id, request);
             if (result.IsSuccessed)
             {
-                TempData["result"] = "Edit user successfully !";
+                TempData["result"] = "Cập nhật người dùng thành công";
                 return RedirectToAction("Index");
             }
+
             ModelState.AddModelError("", result.Message);
             return View(request);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -134,20 +133,19 @@ namespace eShop.AdminApp.Controllers
             return View(new UserDeleteRequest()
             {
                 Id = id
-            }
-            );
+            });
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Delete(UserDeleteRequest request)
         {
             if (!ModelState.IsValid)
                 return View();
+
             var result = await _userApiClient.Delete(request.Id);
             if (result.IsSuccessed)
             {
-                TempData["result"] = "Delete user successfully !";
+                TempData["result"] = "Xóa người dùng thành công";
                 return RedirectToAction("Index");
             }
 
@@ -162,7 +160,6 @@ namespace eShop.AdminApp.Controllers
             return View(roleAssignRequest);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> RoleAssign(RoleAssignRequest request)
         {
@@ -170,13 +167,16 @@ namespace eShop.AdminApp.Controllers
                 return View();
 
             var result = await _userApiClient.RoleAssign(request.Id, request);
+
             if (result.IsSuccessed)
             {
-                TempData["result"] = "Role assign successfully !";
+                TempData["result"] = "Cập nhật quyền thành công";
                 return RedirectToAction("Index");
             }
+
             ModelState.AddModelError("", result.Message);
             var roleAssignRequest = await GetRoleAssignRequest(request.Id);
+
             return View(roleAssignRequest);
         }
 

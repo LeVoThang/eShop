@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShop.Utilities.Exeptions 
+namespace eShop.Utilities.Exceptions 
 {
     public class EShopException : Exception
     {

@@ -1,4 +1,5 @@
-﻿using eShop.ViewModels.Common;
+﻿using eShop.ViewModels.Catalog.Products;
+using eShop.ViewModels.Common;
 using eShop.ViewModels.System.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -136,5 +137,9 @@ namespace eShop.AdminApp.Services
 
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+
+      
+
+
     }
 }
