@@ -62,7 +62,7 @@ namespace eShop.WebApp
                          o.SupportedUICultures = cultures;
                          o.DefaultRequestCulture = new RequestCulture("vi");
                      };
-                 }); ; ;
+                 }); ; 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
