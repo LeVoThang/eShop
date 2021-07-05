@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace eShop.Data.EF
 {
     public class EShopDbContext : IdentityDbContext<AppUser,AppRole,Guid>
