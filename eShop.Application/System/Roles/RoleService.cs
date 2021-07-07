@@ -21,12 +21,13 @@ namespace eShop.Application.System.Roles
 
         public async Task<List<RoleVm>> GetAll()
         {
-            var roles = await _roleManager.Roles.Select(x => new RoleVm()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description
-            }).ToListAsync();
+            var roles = await _roleManager.Roles
+                .Select(x => new RoleVm()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description
+                }).ToListAsync();
 
             return roles;
         }

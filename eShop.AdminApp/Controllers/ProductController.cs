@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using eShop.AdminApp.Services;
+using eShop.ApiIntegration;
 using eShop.Utilities.Constants;
 using eShop.ViewModels.Catalog.Products;
 using eShop.ViewModels.Common;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 
-namespace eShopSolution.AdminApp.Controllers
+namespace eShop.AdminApp.Controllers
 {
     public class ProductController : Controller
     {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace eShopSolution.BackendApi.Controllers
+namespace eShop.BackendApi.Controllers
 {
     //api/products
     [Route("api/[controller]")]
@@ -35,6 +35,15 @@ namespace eShopSolution.BackendApi.Controllers
             if (product == null)
                 return BadRequest("Cannot find product");
             return Ok(product);
+        }
+
+        [HttpGet("featured/{languageId}/{take}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetFeaturedProducts(int take, string languageId)
+        {
+            var products = await _productService.GetFeaturedProducts(languageId, take);
+            
+            return Ok(products);
         }
 
         [HttpPost]
