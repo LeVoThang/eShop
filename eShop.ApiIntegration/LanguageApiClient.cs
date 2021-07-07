@@ -1,5 +1,5 @@
-﻿using eShop.ViewModels.Catalog.Categories;
-using eShop.ViewModels.Common;
+﻿using eShop.ViewModels.Common;
+using eShop.ViewModels.System.Languages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,20 +8,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace eShop.AdminApp.Services
+namespace eShop.ApiIntegration
 {
-    public class CategoryApiClient : BaseApiClient, ICategoryApiClient
+    public class LanguageApiClient : BaseApiClient, ILanguageApiClient
     {
-        public CategoryApiClient(IHttpClientFactory httpClientFactory,
+        public LanguageApiClient(IHttpClientFactory httpClientFactory,
                    IHttpContextAccessor httpContextAccessor,
                     IConfiguration configuration)
             : base(httpClientFactory, httpContextAccessor, configuration)
         {
         }
 
-        public async Task<List<CategoryVm>> GetAll(string languageId)
+        public async Task<ApiResult<List<LanguageVm>>> GetAll()
         {
-            return await GetListAsync<CategoryVm>("/api/categories?languageId=" + languageId);
+            return await GetAsync<ApiResult<List<LanguageVm>>>("/api/languages"); 
         }
     }
 }

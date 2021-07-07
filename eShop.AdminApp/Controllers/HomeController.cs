@@ -22,7 +22,7 @@ namespace eShop.AdminApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index2()
         {
             var user = User.Identity.Name;
             return View();
