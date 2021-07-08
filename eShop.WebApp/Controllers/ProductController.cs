@@ -8,7 +8,7 @@ namespace eShop.WebApp.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult Index(int id)
+        public IActionResult Index2(int id)
         {
             return View();
         }

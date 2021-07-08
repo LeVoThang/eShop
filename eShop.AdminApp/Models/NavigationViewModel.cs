@@ -10,5 +10,7 @@ namespace eShop.AdminApp.Models
     {
         public List<LanguageVm> Languages { set; get; }
         public string CurrentLanguageId { set; get; }
+
+        public string ReturnUrl { get; set; }
     }
 }

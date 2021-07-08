@@ -132,6 +132,8 @@ namespace eShop.WebApp
                         action = "Detail"
                     });
 
+               
+
                 endpoints.MapControllerRoute(
                      name: "default",
                      pattern: "{culture=vi}/{controller=Home}/{action=Index}/{id?}");
