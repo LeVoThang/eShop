@@ -1,18 +1,17 @@
-﻿using eShop.AdminApp.Models;
-using eShop.Utilities.Constants;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using eShop.AdminApp.Models;
+using Microsoft.AspNetCore.Authorization;
+using eShop.Utilities.Constants;
+using Microsoft.AspNetCore.Http;
 
 namespace eShop.AdminApp.Controllers
 {
-    
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
@@ -39,9 +38,12 @@ namespace eShop.AdminApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public ActionResult Language(NavigationViewModel viewModel)
+        [HttpPost]
+        public IActionResult Language(NavigationViewModel viewModel)
         {
-            HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId, viewModel.CurrentLanguageId);
+            HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId,
+                viewModel.CurrentLanguageId);
+
             return Redirect(viewModel.ReturnUrl);
         }
     }

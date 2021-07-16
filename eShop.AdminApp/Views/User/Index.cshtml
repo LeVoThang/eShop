@@ -2,7 +2,7 @@
 @model PagedResult<eShop.ViewModels.System.Users.UserVm>
 
 @{
-    ViewData["Title"] = "User list";
+    ViewData["Title"] = "Danh sách người dùng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
@@ -11,28 +11,28 @@
             $('#msgAlert').fadeOut('slow');
         }, 2000);
     </script>
- }
+}
 <div class="container-fluid">
-    <h1 class="mt-4">User list</h1>
+    <h1 class="mt-4">Danh sách người dùng</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">User list</li>
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách người dùng</li>
     </ol>
     <div class="card mb-12">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <a class="btn btn-success" asp-action="Create" asp-controller="User">Create user</a>
+                    <a class="btn btn-success" asp-action="Create" asp-controller="User">Tạo mới</a>
                 </div>
                 <div class="col-md-6 col-xs-12">
                     <form asp-action="Index" method="get">
                         <div class="row">
-                            <div class="col-md-8">
-                                <input type="text" name="keyword" class="form-control" value="@ViewBag.Keyword"/>
+                            <div class="col-md-9">
+                                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                             </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <button type="button" class="btn btn-dark" onclick="window.location.href='User/Index'">Reset</button>
+                            <div class="cold-md-3">
+                                <button type="submit" class="btn btn-primary">Tìm</button>
+                                <button type="button" onclick="window.location.href='/User/Index'" class="btn btn-dark">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -54,16 +54,16 @@
                     <thead>
                         <tr>
                             <th>
-                                First name
+                                Tên
                             </th>
                             <th>
-                                Last Name
+                                Họ
                             </th>
                             <th>
-                                Phone number
+                                Số điện thoại
                             </th>
                             <th>
-                                User name
+                                Tài khoản
                             </th>
                             <th>
                                 Email
@@ -91,17 +91,17 @@
                                     @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
-                                    @Html.ActionLink("RoleAssign", "RoleAssign", new { id = item.Id })
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Xem", "Details", new { id = item.Id }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }) |
+                                    @Html.ActionLink("Gán quyền", "RoleAssign", new { id = item.Id })
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
-            @await Component.InvokeAsync("Pager", Model)
+           
         </div>
     </div>
 </div>
