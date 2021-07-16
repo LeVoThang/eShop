@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using eShop.AdminApp.Controllers;
 using eShop.ApiIntegration;
 using eShop.ViewModels.Common;
 using eShop.ViewModels.System.Users;

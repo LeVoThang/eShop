@@ -1,4 +1,5 @@
-﻿using eShop.ViewModels.Catalog.Categories;
+﻿using eShop.ApiIntegration;
+using eShop.ViewModels.Catalog.Categories;
 using eShop.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,11 @@ namespace eShop.ApiIntegration
         public async Task<List<CategoryVm>> GetAll(string languageId)
         {
             return await GetListAsync<CategoryVm>("/api/categories?languageId=" + languageId);
+        }
+
+        public async Task<CategoryVm> GetById(string languageId, int id)
+        {
+            return await GetAsync<CategoryVm>($"/api/categories/{id}/{languageId}");
         }
     }
 }

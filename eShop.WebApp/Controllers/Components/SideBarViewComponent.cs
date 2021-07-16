@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eShop.WebApp.Controllers.Components
 {
-    public class SideBarViewComponent: ViewComponent
+    public class SideBarViewComponent : ViewComponent
     {
         private readonly ICategoryApiClient _categoryApiClient;
 
@@ -16,7 +16,7 @@ namespace eShop.WebApp.Controllers.Components
         {
             _categoryApiClient = categoryApiClient;
         }
-         
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var items = await _categoryApiClient.GetAll(CultureInfo.CurrentCulture.Name);
